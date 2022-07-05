@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Admin;
 
 class PageController extends Controller
 {
@@ -16,10 +17,35 @@ class PageController extends Controller
     }
 
     public function service () {
-        $services = ["Automation", "Chatbot", "Aritficial Intelligence"] ;
-        return view('page.service')
-        ->with('services', $services);
+        // $services = ["Automation", "Chatbot", "Aritficial Intelligence"] ;
+        // return view('page.service')
+        // ->with('services', $services);
+        $admins = Admin::all();
+        return view('page.service')->with('admins',$admins); 
     }
+
+    public function list() {
+        $admins = Admin::all();
+        return view('page.list')->with('admins',$admins); 
+    }
+    public function edit(Request $req) {
+        // $id =$req->id;
+        $admin = Admin::where('id','=',decrypt($req->id))->select('user_name','id')->get();
+        return $admin;
+
+    }
+    public function editSubmit(Request $req) {
+        // $id =$req->id;
+        $admin = Admin::where('id','=',$req->id)->select('user_name','id')->first();
+        $admin->user_name =$req->user_name;
+        $admin->user_email =$req->user_email;
+        $admin->save();
+       
+        return $admin;
+
+    }
+ 
+ 
 
     public function teams () {
         return view('page.teams'); 
@@ -37,19 +63,18 @@ class PageController extends Controller
     }
 
     public function registersubmit (Request $req) {
-        $req->validate(
-            [
-                 'user_name'=>'required|min:5|max:20|alpha',
-                 'user_email'=>'required|email',
-                 'user_gender'=>'required',
-                 'user_password'=>'required|min:2',
-                 'user_com_password'=>'required|same:user_password'
+        // $req->validate(
+        //     [
+        //          'user_name'=>'required|min:5|max:20|alpha',
+        //          'user_email'=>'required|email',
+        //          'user_gender'=>'required',
+        //          'user_password'=>'required|min:2',
+        //          'user_com_password'=>'required|same:user_password'
 
-            ]
-            );
+        //     ]
+        //     );
 
-
-        return "<h1>This is $req->user_name</h1>";
+         
     }
 
     public function loginsubmit (Request $req) {

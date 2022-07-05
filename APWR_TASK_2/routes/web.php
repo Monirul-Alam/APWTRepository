@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,7 +32,15 @@ Route::get('/login', [PageController::class, 'login'])->name('login');
 
 
 Route::Post('/register', [PageController::class, 'registersubmit'])->name('register.submit');
-
 Route::Post('/login', [PageController::class, 'loginsubmit'])->name('login.submit');
-
 Route::Post('/contact', [PageController::class, 'contactsubmit'])->name('contact.submit');
+
+
+
+Route::get('/admins/list', [PageController::class, 'list'])->name('admins.list');
+Route::get('/student/edit/{id}', [PageController::class, 'edit'])->name('admins.edit');
+
+
+
+Route::get('/users/register', [UserController::class, 'user_register'])->name('user_register');
+Route::Post('/users/register', [UserController::class, 'user_registersubmit'])->name('user_register.submit');

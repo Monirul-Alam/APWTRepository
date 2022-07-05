@@ -21,6 +21,9 @@
     <a href="/contact">Contact</a>
     <a href="/login">login</a>
     <a href="/register">Register</a>
+    <a href="/users/register">User Register</a>
+    <a href="/admins/list">list</a>
+
     
     
   </div>

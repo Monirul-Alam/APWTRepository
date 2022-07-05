@@ -12,12 +12,12 @@
           <legend><span class="number">1</span> Your basic info</legend>
           
           <label for="name">Name:</label>
-          <input type="text" id="name" name="user_name">
+          <input type="text" id="name" name="user_name" value= "{{old('user_name')}}" >
           @error('user_name')
               <span class="text-danger">{{$message}}</span><br>
           @enderror
           <label for="mail">Email:</label>
-          <input type="email" id="mail" name="user_email">
+          <input type="email" id="mail" name="user_email" value= "{{old('user_email')}}">
           @error('user_email')
               <span class="text-danger">{{$message}}</span><br>
           @enderror
